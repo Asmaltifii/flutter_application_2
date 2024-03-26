@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: BluetoothApp(),
+    );
+  }
+}
+
+class BluetoothApp extends StatefulWidget {
+  @override
+  _BluetoothAppState createState() => _BluetoothAppState();
+}
+
+class _BluetoothAppState extends State<BluetoothApp> {
+  FlutterBlue flutterBlue = FlutterBlue.instance;
+  List<BluetoothDevice> devicesList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _scanDevices();
+  }
+
+  void _scanDevices() {
+    flutterBlue.startScan(timeout: Duration(seconds: 4));
+    flutterBlue.scanResults.listen((List<ScanResult> results) {
+      for (ScanResult result in results) {
+        if (!devicesList.contains(result.device)) {
+          setState(() {
+            devicesList.add(result.device);
+          });
+        }
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Bluetooth Scanner'),
+      ),
+      body: ListView.builder(
+        itemCount: devicesList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(devicesList[index].name ?? "Unknown"),
+            subtitle: Text(devicesList[index].id.toString()),
+            onTap: () {
+              // Connect to the selected Bluetooth device here
+            },
+          );
+        },
+      ),
+    );
+  }
+}
