@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/about.dart';
+import 'package:flutter_application_1/pages/home.dart';
+import 'package:flutter_application_1/pages/inventaire.dart';
+import 'package:flutter_application_1/pages/welcom.dart';
 
 class Stock extends StatelessWidget {
   const Stock({super.key});
@@ -18,8 +22,8 @@ class Stock extends StatelessWidget {
                       image: AssetImage("assets/images/ae.jpg"),
                       fit: BoxFit.cover),
                 ),
-                accountName: Text("data"),
-                accountEmail: Text("@data"),
+                accountName: Text(""),
+                accountEmail: Text(""),
                 currentAccountPicture: CircleAvatar(
                   radius: 55,
                   backgroundImage: AssetImage("assets/images/energia.png"),
@@ -28,27 +32,42 @@ class Stock extends StatelessWidget {
               ListTile(
                 title: Text("Home"),
                 leading: Icon(Icons.home),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
               ),
               ListTile(
-                title: Text("Invontaire"),
+                title: Text("Inventory"),
                 leading: Icon(Icons.inventory_outlined),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Inventaire()));
+                },
               ),
               ListTile(
-                title: Text("Stock"),
+                title: Text("Stocks"),
                 leading: Icon(Icons.storage),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Stock()));
+                },
               ),
               ListTile(
                 title: Text("About"),
                 leading: Icon(Icons.help_center),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => About()));
+                },
               ),
               ListTile(
                 title: Text("Log out"),
                 leading: Icon(Icons.exit_to_app),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Welcome()));
+                },
               ),
             ],
           ),
@@ -56,7 +75,7 @@ class Stock extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.red[300],
           title: Text(
-            "Stock",
+            "Stocks",
             style: TextStyle(
                 fontWeight: FontWeight.w400, fontSize: 35, fontFamily: "font"),
           ),
@@ -65,7 +84,7 @@ class Stock extends StatelessWidget {
           children: [
             SizedBox(height: 30),
             Text(
-              "Reference article",
+              "Artical References ",
               style: TextStyle(fontFamily: "font", fontSize: 30),
             ),
             TextField(
@@ -75,36 +94,39 @@ class Stock extends StatelessWidget {
               height: 30,
             ),
             Text(
-              "Quantite Stock: ",
+              "Quantity stored: ",
               style: TextStyle(fontFamily: "font", fontSize: 30),
             ),
             TextField(
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height:30),
+            SizedBox(height: 30),
             Text(
-              "Quantite inventoriee :",
+              "Inventory Quantity :",
               style: TextStyle(fontFamily: "font", fontSize: 30),
             ),
             TextField(
               keyboardType: TextInputType.number,
             ),
             SizedBox(height: 100),
-
             Row(
               children: [
                 SizedBox(width: 40),
                 ElevatedButton(
-                  onPressed: () {}, 
-                  child: Text("Valide", 
-                  style: TextStyle(fontSize: 30 , color: Colors.red[300]),
+                  onPressed: () {},
+                  child: Text(
+                    "Valid",
+                    style: TextStyle(fontSize: 30, color: Colors.red[300]),
                   ),
                 ),
-                SizedBox(width: 50,),
+                SizedBox(
+                  width: 50,
+                ),
                 ElevatedButton(
-                  onPressed: () {}, 
-                  child: Text("Annuler", 
-                  style: TextStyle(fontSize: 30 , color: Colors.grey[600]),
+                  onPressed: () {},
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(fontSize: 30, color: Colors.grey[600]),
                   ),
                 ),
               ],

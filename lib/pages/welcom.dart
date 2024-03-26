@@ -12,7 +12,7 @@ class Welcome extends StatelessWidget {
           backgroundColor: Colors.red[300],
           title: Center(
               child: Text(
-            "Welcom",
+            "Welcome",
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 35, fontFamily: "font"),
           )),
@@ -29,9 +29,9 @@ class Welcome extends StatelessWidget {
               ),
               SizedBox(height: 80),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
+              
+                onPressed: () {Navigator.pushNamed(context, '/login');
+                  },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.red[99]),
                   padding: MaterialStateProperty.all(
@@ -48,7 +48,7 @@ class Welcome extends StatelessWidget {
                 height: 22,
               ),
               ElevatedButton(
-                onPressed: () {  Navigator.pushNamed(context, '/signup');},
+                onPressed: () { Navigator.pushNamed(context, '/signup'); },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.red[100]),
                   padding: MaterialStateProperty.all(

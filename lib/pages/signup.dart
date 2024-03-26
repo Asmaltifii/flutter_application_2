@@ -1,12 +1,30 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, use_build_context_synchronously, avoid_print
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/login.dart';
 import 'package:flutter_application_1/pages/welcom.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
   const Signup({super.key});
 
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  final List<String> items = [
+    'StoreKeeper',
+    'Supervisor',
+  ];
+  String? selectedValue;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,6 +61,7 @@ class Signup extends StatelessWidget {
                   width: 120,
                 ),
                 SizedBox(height: 50),
+                // Name
                 Container(
                     decoration: BoxDecoration(
                         color: Colors.red[200],
@@ -56,6 +75,7 @@ class Signup extends StatelessWidget {
                         prefixIcon: Icon(Icons.person),
                       ),
                     )),
+                // Prename
                 Container(
                     margin: EdgeInsets.symmetric(vertical: 15, horizontal: 6),
                     decoration: BoxDecoration(
@@ -63,7 +83,6 @@ class Signup extends StatelessWidget {
                         borderRadius: BorderRadius.circular(22)),
                     width: 350,
                     child: TextField(
-                      obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Prename :",
@@ -71,6 +90,7 @@ class Signup extends StatelessWidget {
                         prefixIcon: Icon(Icons.person),
                       ),
                     )),
+                // email
                 Container(
                     margin: EdgeInsets.symmetric(vertical: 2, horizontal: 6),
                     decoration: BoxDecoration(
@@ -78,8 +98,8 @@ class Signup extends StatelessWidget {
                         borderRadius: BorderRadius.circular(22)),
                     width: 350,
                     child: TextField(
+                      controller: emailController,
                       keyboardType: TextInputType.emailAddress,
-                      obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "E-mail :",
@@ -87,6 +107,7 @@ class Signup extends StatelessWidget {
                         prefixIcon: Icon(Icons.mail),
                       ),
                     )),
+                // password
                 Container(
                     margin: EdgeInsets.symmetric(vertical: 15, horizontal: 6),
                     decoration: BoxDecoration(
@@ -94,6 +115,7 @@ class Signup extends StatelessWidget {
                         borderRadius: BorderRadius.circular(22)),
                     width: 350,
                     child: TextField(
+                      controller: passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -103,6 +125,7 @@ class Signup extends StatelessWidget {
                         suffixIcon: Icon(Icons.visibility),
                       ),
                     )),
+                // confirme password
                 Container(
                     margin: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                     decoration: BoxDecoration(
@@ -119,9 +142,54 @@ class Signup extends StatelessWidget {
                         suffixIcon: Icon(Icons.visibility),
                       ),
                     )),
+                // select
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.red[200],
+                      borderRadius: BorderRadius.circular(22)),
+                  width: 350,
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton2<String>(
+                      isExpanded: true,
+                      hint: Text(
+                        'Select Position',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).hintColor,
+                        ),
+                      ),
+                      items: items
+                          .map((String item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: selectedValue,
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedValue = value;
+                        });
+                      },
+                      buttonStyleData: const ButtonStyleData(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        height: 50,
+                        width: 140,
+                      ),
+                      menuItemStyleData: const MenuItemStyleData(
+                        height: 40,
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: ()  {  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red[99]),
                     padding: MaterialStateProperty.all(EdgeInsets.symmetric(
@@ -160,4 +228,5 @@ class Signup extends StatelessWidget {
       ),
     );
   }
+
 }

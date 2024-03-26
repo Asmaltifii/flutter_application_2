@@ -1,11 +1,24 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, avoid_print, unused_local_variable, use_build_context_synchronously
+
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/home.dart';
 import 'package:flutter_application_1/pages/signup.dart';
 import 'package:flutter_application_1/pages/welcom.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +65,7 @@ class Login extends StatelessWidget {
                     child: TextField(
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Email :",
+                        hintText: "Email :", 
                         hintStyle: TextStyle(fontSize: 19),
                         prefixIcon: Icon(Icons.person),
                       ),
@@ -75,7 +88,10 @@ class Login extends StatelessWidget {
                       ),
                     )),
                 ElevatedButton(
-                  onPressed: () { },
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
                   child: Text(
                     "Log in",
                     style: TextStyle(fontSize: 19),
@@ -114,5 +130,7 @@ class Login extends StatelessWidget {
         ),
       ),
     );
+
+  
   }
 }
